@@ -1,6 +1,5 @@
 <script>
 import {Source} from "../model/source.entity.js";
-import PvAvatar from "../../main.js";
 
 export default {
   name: "source-item",

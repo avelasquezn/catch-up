@@ -1,6 +1,5 @@
 <script>
 import {Article} from "../model/article.entity.js";
-import PvAvatar from "../../main.js";
 
 export default {
   name: "article-item",
