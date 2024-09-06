@@ -5,10 +5,11 @@ import LanguageSwitcher from "./public/components/language-switcher.component.vu
 import ArticleList from "./news/components/article-list.component.vue";
 import UnavailableContent from "./news/components/unavailable-content.component.vue";
 import FooterContent from "./public/components/footer-content.component.vue";
+import SourceList from "./news/components/source-list.component.vue";
 
 export default {
   name: 'App',
-  components: {FooterContent, UnavailableContent, ArticleList, LanguageSwitcher},
+  components: {SourceList, FooterContent, UnavailableContent, ArticleList, LanguageSwitcher},
   data() {
     return {
       drawerVisible: false,
@@ -23,6 +24,7 @@ export default {
           new Article(
               article.title,
               article.description,
+              article.author,
               article.url,
               article.urlToImage,
               article.source,
@@ -55,6 +57,9 @@ export default {
       this.getArticlesForSourceWithLogo(source);
       this.toggleSidebar();
     }
+  },
+  created() {
+    this.getArticlesForSource('bbc-news');
   }
 }
 </script>
@@ -66,6 +71,9 @@ export default {
         <template #start>
           <pv-button icon="pi pi bars" label="CatchUp"
                      text @click="toggleSidebar"/>
+          <source-list
+              v-model:visible="drawerVisible"
+              @sourceSelected="setSource"/>
         </template>
         <template #end>
           <language-switcher/>
